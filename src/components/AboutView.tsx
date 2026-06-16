@@ -22,17 +22,17 @@ export default function AboutView() {
       title: "The Sunset Silhouette",
       category: "Personal Atmosphere",
       desc: "A contemplative twilight shot captured on the hills overlooking the campus horizon. It represents looking forward into the technological frontier. Designated as the full hero background texture of this portfolio.",
-      url: "https://images.unsplash.com/photo-1475924156734-496f6cac6ec1?auto=format&fit=crop&w=1200&q=80",
+      url: "/images/my-sunset.jpeg",
       date: "19:45:14 (Sunset)",
       location: "Campus Outlook Edge",
       tag: "Aesthetic Core & Background"
     },
     {
       id: "motorcycle",
-      title: "Sports Yamaha Cruise",
+      title: "Bike Rides",
       category: "Lifestyles",
       desc: "Standing alongside a high-performance Yamaha sports motorcycle. Embracing speed, mechanical precision, and sharp focus both on the asphalt and during systems development.",
-      url: "https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=1200&q=80",
+      url: "/images/my-bike.jpeg",
       date: "January 2025",
       location: "Bhubaneswar Highway",
       tag: "Active Life"
@@ -42,7 +42,7 @@ export default function AboutView() {
       title: "Google Student Ambassador Keynote",
       category: "Leadership",
       desc: "Delivering the initial Gemini developer sprint introductory address behind the wooden podium inside the KIIT auditorium. Engaging campus minds in frontier AI.",
-      url: "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&w=1200&q=80",
+      url: "/images/keynote-speech.jpg",
       date: "May 2026",
       location: "KIIT University Auditorium",
       tag: "Keynote Panels"
@@ -62,7 +62,7 @@ export default function AboutView() {
       title: "Creative Inspiration Wall",
       category: "Visuals",
       desc: "An aesthetic wall structured with iconic cinematic and automotive posters—featuring Drive, Spider-Man, and Aston Martin. Fuel for ongoing creative programming builds.",
-      url: "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=1200&q=80",
+      url: "/images/room-wall.jpeg",
       date: "Continuous Inspiration",
       location: "Personal Creative Room",
       tag: "Aesthetic Philosophy"
@@ -72,7 +72,7 @@ export default function AboutView() {
       title: "Official Summit Presentation",
       category: "Professional Profile",
       desc: "Polished presentation wear for the Google Ambassador Summit, presenting strategic adoption frameworks and mentoring student innovators.",
-      url: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=1200&q=80",
+      url: "/images/summit-presentation.jpeg",
       date: "May 2026",
       location: "Regional Ambassador Hub",
       tag: "Authority & Prestige"
@@ -139,7 +139,7 @@ export default function AboutView() {
             {/* Elegant double-ring image container */}
             <div className="absolute inset-3 rounded-full overflow-hidden border border-[#C8A96E]/30 relative group shadow-[0_0_35px_rgba(200,169,110,0.15)] bg-[#111]">
               <img
-                src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=800&q=80"
+                src="/images/profile-portrait.jpeg"
                 alt="Sourik Das Professional Portrait"
                 referrerPolicy="no-referrer"
                 className="w-full h-full object-cover grayscale contrast-125 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
