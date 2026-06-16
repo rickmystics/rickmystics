@@ -42,7 +42,7 @@ export default function AboutView() {
       title: "Google Student Ambassador Keynote",
       category: "Leadership",
       desc: "Delivering the initial Gemini developer sprint introductory address behind the wooden podium inside the KIIT auditorium. Engaging campus minds in frontier AI.",
-      url: "/images/keynote-speech.jpg",
+      url: "/images/keynote-speech.jpeg",
       date: "May 2026",
       location: "KIIT University Auditorium",
       tag: "Keynote Panels"
