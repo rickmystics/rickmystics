@@ -1,31 +1,28 @@
-import { GoogleGenAI } from "@google/generative-ai";
+import { GoogleGenAI } from "@google/genai";
 
 export default async function handler(req: any, res: any) {
-  // Only allow POST requests from your chat window
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
-  // Securely reads the key from your Vercel Project Dashboard settings
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) {
     return res.status(500).json({ error: "GEMINI_API_KEY is not configured on the server." });
   }
 
   try {
+    // Initialize the modern client
     const ai = new GoogleGenAI({ apiKey });
     const { messages } = req.body;
-    
-    // Safely extract the very last text chunk the user submitted
     const lastUserMessage = messages[messages.length - 1]?.text || "";
 
-    // Target the lightweight and rapid gemini-1.5-flash engine
-    const model = ai.getGenerativeModel({ model: "gemini-1.5-flash" });
-    const result = await model.generateContent(lastUserMessage);
-    const responseText = result.response.text();
+    // The new SDK targets models through the ai.models property
+    const response = await ai.models.generateContent({
+      model: "gemini-2.5-flash", 
+      contents: lastUserMessage,
+    });
 
-    // Return the response data directly to your frontend UI array
-    return res.status(200).json({ text: responseText });
+    return res.status(200).json({ text: response.text });
   } catch (error: any) {
     return res.status(500).json({ error: error.message });
   }
