@@ -1,4 +1,3 @@
-## 🌐 Portfolio & AI Twin
+## 🔗 Connect With Me
 
-Check out my live portfolio and chat with my AI Twin here: 
-👉 **[Live Portfolio](https://rickmystics07.vercel.app/)**
+[![Portfolio](https://img.shields.io/badge/Live_Portfolio-Vercel-black?style=for-the-badge&logo=vercel&logoColor=white)](https://rickmystics07.vercel.app/)
