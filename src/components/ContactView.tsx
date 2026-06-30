@@ -9,27 +9,39 @@ export default function ContactView() {
     message: "",
   });
 
-  const [submitted, setSubmitted] = useState(false);
+  const [status, setStatus] = useState<"IDLE" | "SENDING" | "SUCCESS" | "ERROR">("IDLE");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setStatus("SENDING");
 
-    const subjectText = formData.subject || "Collaboration Inquiry from Website";
-    const bodyText = `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`;
+    try {
+      const response = await fetch("https://formspree.io/f/mqevdjbg", {
+        method: "POST",
+        body: JSON.stringify(formData),
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        }
+      });
 
-    // Standard mailto handling for direct, reliable client submissions
-    const mailtoUrl = `mailto:sourikdas007@gmail.com?subject=${encodeURIComponent(
-      subjectText
-    )}&body=${encodeURIComponent(bodyText)}`;
-
-    window.location.href = mailtoUrl;
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 3000);
+      if (response.ok) {
+        setStatus("SUCCESS");
+        setFormData({ name: "", email: "", subject: "", message: "" });
+        setTimeout(() => setStatus("IDLE"), 4000);
+      } else {
+        setStatus("ERROR");
+        setTimeout(() => setStatus("IDLE"), 4000);
+      }
+    } catch (error) {
+      setStatus("ERROR");
+      setTimeout(() => setStatus("IDLE"), 4000);
+    }
   };
 
   const contacts = [
@@ -41,7 +53,7 @@ export default function ContactView() {
     },
     {
       label: "LinkedIn",
-      value: "linkedin.com/in/sourik-das-6529ba322",
+      value: "linkedin.com/in/sourik...",
       link: "https://linkedin.com/in/sourik-das-6529ba322",
       icon: <Linkedin size={16} className="text-[#C8A96E]" />,
     },
@@ -53,7 +65,7 @@ export default function ContactView() {
     },
     {
       label: "LeetCode",
-      value: "leetcode.com/u/rickmystics",
+      value: "leetcode.com/u/rickmys...",
       link: "https://leetcode.com/u/rickmystics",
       icon: <Trophy size={16} className="text-[#C8A96E]" />,
     },
@@ -82,13 +94,12 @@ export default function ContactView() {
           <span className="font-serif italic font-medium text-[#C8A96E]">That Matters.</span>
         </h1>
         <p className="text-[#888880] font-sans font-light text-base md:text-lg max-w-xl leading-relaxed">
-          Whether it's a academic collaboration, internship inquiry, or just a strategic exchange—I'm always open to the right conversation.
+          Whether it's an academic collaboration, internship inquiry, or just a strategic exchange—I'm always open to the right conversation.
         </p>
       </div>
 
       {/* AVAILABILITY STATUS PILL */}
       <div className="inline-flex items-center gap-3.5 px-4 py-2 border border-[#C8A96E]/15 bg-[#111] rounded-full mb-12 select-none">
-        {/* Pulsing active green dot */}
         <span className="relative flex h-2.5 w-2.5">
           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
           <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
@@ -114,7 +125,7 @@ export default function ContactView() {
                 required
                 value={formData.name}
                 onChange={handleChange}
-                placeholder="John Doe"
+                placeholder="sourik das"
                 className="w-full bg-[#0A0A0A] border border-[#C8A96E]/15 focus:border-[#C8A96E]/60 text-sm p-4 rounded text-[#F2EDE4] outline-none transition-colors"
               />
             </div>
@@ -130,7 +141,7 @@ export default function ContactView() {
                 required
                 value={formData.email}
                 onChange={handleChange}
-                placeholder="john@example.com"
+                placeholder="24155964@kiit.ac.in"
                 className="w-full bg-[#0A0A0A] border border-[#C8A96E]/15 focus:border-[#C8A96E]/60 text-sm p-4 rounded text-[#F2EDE4] outline-none transition-colors"
               />
             </div>
@@ -147,7 +158,7 @@ export default function ContactView() {
               name="subject"
               value={formData.subject}
               onChange={handleChange}
-              placeholder="E.g., Hackathon Recruitment Sprints"
+              placeholder="hackathons"
               className="w-full bg-[#0A0A0A] border border-[#C8A96E]/15 focus:border-[#C8A96E]/60 text-sm p-4 rounded text-[#F2EDE4] outline-none transition-colors"
             />
           </div>
@@ -163,16 +174,20 @@ export default function ContactView() {
               rows={5}
               value={formData.message}
               onChange={handleChange}
-              placeholder="What are we building?"
+              placeholder="i want to do a hackathon with you"
               className="w-full bg-[#0A0A0A] border border-[#C8A96E]/15 focus:border-[#C8A96E]/60 text-sm p-4 rounded text-[#F2EDE4] outline-none transition-colors resize-none"
             />
           </div>
 
           <button
             type="submit"
-            className="w-full py-4 bg-[#C8A96E] text-[#0A0A0A] font-bold text-xs tracking-[0.25em] uppercase hover:bg-transparent hover:text-[#C8A96E] border border-[#C8A96E] transition-all duration-300 rounded flex items-center justify-center gap-2 group cursor-pointer shadow-[0_5px_15px_rgba(200,169,110,0.1)]"
+            disabled={status === "SENDING"}
+            className="w-full py-4 bg-[#C8A96E] text-[#0A0A0A] font-bold text-xs tracking-[0.25em] uppercase hover:bg-transparent hover:text-[#C8A96E] border border-[#C8A96E] transition-all duration-300 rounded flex items-center justify-center gap-2 group cursor-pointer shadow-[0_5px_15px_rgba(200,169,110,0.1)] disabled:opacity-50"
           >
-            {submitted ? "Launching Client..." : "Send Message"}
+            {status === "IDLE" && "Send Message"}
+            {status === "SENDING" && "Sending..."}
+            {status === "SUCCESS" && "Success!"}
+            {status === "ERROR" && "Error. Try Again"}
             <Send size={14} className="group-hover:translate-x-1.5 group-hover:scale-105 transition-transform" />
           </button>
         </form>
@@ -214,7 +229,6 @@ export default function ContactView() {
 
       {/* THE INSTAGRAM COMPLEMENT BLOCK */}
       <div className="bg-[#111] p-8 md:p-12 border border-[#C8A96E]/15 rounded-2xl grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-        {/* Title & handles */}
         <div className="md:col-span-8 space-y-4">
           <span className="px-3 py-1 border border-dashed border-[#C8A96E]/30 text-[10px] font-mono text-[#C8A96E] uppercase rounded tracking-widest inline-block select-none bg-[#C8A96E]/5">
             INSTAGRAM FEED
@@ -223,11 +237,10 @@ export default function ContactView() {
             Connect on Instagram
           </h2>
           <p className="text-sm font-sans font-light text-[#888880] leading-relaxed max-w-lg">
-            Catch the unfiltered side — student summits, developers hack sprints, and late night coffee workflows in KIIT.
+            Catch the unfiltered side — student summits, developer hack sprints, and late-night coffee workflows in KIIT.
           </p>
         </div>
 
-        {/* CTA */}
         <div className="md:col-span-4 justify-self-start md:justify-self-end">
           <a
             href="https://www.instagram.com/__rick.mystics__?igsh=MWo1b285ZGx6ZW5lZQ=="
