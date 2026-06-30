@@ -125,7 +125,7 @@ export default function ContactView() {
                 required
                 value={formData.name}
                 onChange={handleChange}
-                placeholder="sourik das"
+                placeholder="Mike"
                 className="w-full bg-[#0A0A0A] border border-[#C8A96E]/15 focus:border-[#C8A96E]/60 text-sm p-4 rounded text-[#F2EDE4] outline-none transition-colors"
               />
             </div>
@@ -141,7 +141,7 @@ export default function ContactView() {
                 required
                 value={formData.email}
                 onChange={handleChange}
-                placeholder="24155964@kiit.ac.in"
+                placeholder="mike@gmail.com"
                 className="w-full bg-[#0A0A0A] border border-[#C8A96E]/15 focus:border-[#C8A96E]/60 text-sm p-4 rounded text-[#F2EDE4] outline-none transition-colors"
               />
             </div>
@@ -158,7 +158,7 @@ export default function ContactView() {
               name="subject"
               value={formData.subject}
               onChange={handleChange}
-              placeholder="hackathons"
+              placeholder="Subject"
               className="w-full bg-[#0A0A0A] border border-[#C8A96E]/15 focus:border-[#C8A96E]/60 text-sm p-4 rounded text-[#F2EDE4] outline-none transition-colors"
             />
           </div>
@@ -174,7 +174,7 @@ export default function ContactView() {
               rows={5}
               value={formData.message}
               onChange={handleChange}
-              placeholder="i want to do a hackathon with you"
+              placeholder="Type a message"
               className="w-full bg-[#0A0A0A] border border-[#C8A96E]/15 focus:border-[#C8A96E]/60 text-sm p-4 rounded text-[#F2EDE4] outline-none transition-colors resize-none"
             />
           </div>
